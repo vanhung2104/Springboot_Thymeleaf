@@ -1,37 +1,26 @@
-<a th:href="@{/admin/categories/add}">Add Category</a>
+<a th:href="@{/api/category/add}">Add Category</a>
 <table border="1" width="100%">
     <tr>
         <th>STT</th>
         <th>Images</th>
         <th>CategoryID</th>
         <th>CategoryName</th>
-        <th>Status</th>
-        <th>Action</th>
     </tr>
 
     <tr th:each="cate, stat : ${list}">
         <td th:text="${stat.index + 1}"></td>
 
         <td>
-            <span th:if="${#strings.substring(cate.images, 0, 5) != 'https'}"
-                  th:attr="imgUrl='/image?fname=' + ${cate.images}"></span>
-            <span th:if="${#strings.substring(cate.images, 0, 5) == 'https'}"
-                  th:attr="imgUrl=${cate.images}"></span>
-            <img height="150" width="200" th:src="${imgUrl}" />
+            <img height="150" width="200"
+                 th:src="${#strings.substring(cate.icon, 0, 5) == 'https' ? cate.icon : '/image?fname=' + cate.icon}" />
         </td>
 
         <td th:text="${cate.categoryId}"></td>
-        <td th:text="${cate.categoryname}"></td>
+        <td th:text="${cate.categoryName}"></td>
 
         <td>
-            <span th:if="${cate.status == 1}">Hoạt động</span>
-            <span th:if="${cate.status != 1}">Khóa</span>
-        </td>
-
-        <td>
-            <a th:href="@{/admin/category/edit(id=${cate.categoryId})}">Sửa</a> |
-            <a th:href="@{/admin/category/delete(id=${cate.categoryId})}">Xóa</a> |
-            <a th:href="@{/admin/videos(categoryid=${cate.categoryId})}">List Video</a>
+            <a th:href="@{/api/category/edit/{id}(id=${cate.categoryId})}">Sửa</a> |
+            <a th:href="@{/api/category/delete/{id}(id=${cate.categoryId})}">Xóa</a> |
         </td>
     </tr>
 </table>

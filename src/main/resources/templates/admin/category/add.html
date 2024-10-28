@@ -1,0 +1,12 @@
+
+<form th:action="@{/api/category/saveadd}" th:object="${category}" method="post">
+  <label for="categoryName">Name</label>
+  <input type="text" th:field="*{categoryName}" id="categoryName" placeholder="Name">
+  <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}">Error message</span>
+
+  <label for="icon">Img</label>
+  <input type="text" th:field="*{icon}" id="icon" placeholder="Image URL">
+  <span th:if="${#fields.hasErrors('icon')}" th:errors="*{icon}">Error message</span>
+
+  <input type="submit" value="Add Category">
+</form>

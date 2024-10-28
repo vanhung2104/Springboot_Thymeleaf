@@ -1,0 +1,9 @@
+<form action="#" th:action="@{/api/category/saveedit/{id}(id=${category.categoryId})}" th:object="${category}" method="post">
+    <label for="name">Name</label>
+    <input type="text" th:field="*{categoryName}" id="name" placeholder="Name">
+    <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></span>
+    <label for="email">Img</label>
+    <input type="text" th:field="*{icon}" id="email" placeholder="Email">
+    <span th:if="${#fields.hasErrors('icon')}" th:errors="*{icon}"></span>
+    <input type="submit" value="Edit Category">
+</form>

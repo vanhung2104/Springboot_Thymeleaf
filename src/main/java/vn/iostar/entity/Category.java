@@ -20,7 +20,9 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long categoryId;
+    @Column(name = "categoryName", length = 200, columnDefinition = "nvarchar(200) not null")
     private String categoryName;
+    @Column(name = "image", length = 500, columnDefinition = "nvarchar(1000)")
     private String icon;
 
     @JsonIgnore

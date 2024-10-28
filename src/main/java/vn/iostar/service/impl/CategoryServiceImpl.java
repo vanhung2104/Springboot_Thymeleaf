@@ -26,21 +26,7 @@ public class CategoryServiceImpl implements ICategoryService {
 
     @Override
     public <S extends Category> S save(S entity) {
-        if(entity.getCategoryId() == null) {
             return categoryRepository.save(entity);
-        }else {
-            Optional<Category> opt = findById(entity.getCategoryId());
-            if(opt.isPresent()) {
-                if (StringUtils.isEmpty(entity.getIcon())) {
-                    entity.setIcon(opt.get().getIcon());
-                }else {
-                    //lấy lại images cũ
-                    entity.setIcon(entity.getIcon());
-                }
-            }
-            return categoryRepository.save(entity);
-
-        }
     }
     @Override
     public Optional<Category> findByCategoryName(String name) {
