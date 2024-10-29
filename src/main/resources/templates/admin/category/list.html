@@ -1,3 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LTWst2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- JavaScript -->
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+<header th:replace="/layout/header :: header"></header>
 <a th:href="@{/api/category/add}">Add Category</a>
 <table border="1" width="100%">
     <tr>
@@ -24,3 +37,6 @@
         </td>
     </tr>
 </table>
+<footer th:replace="/layout/footer :: footer"></footer>
+</body>
+</html>

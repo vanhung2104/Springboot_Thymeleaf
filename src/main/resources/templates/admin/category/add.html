@@ -1,4 +1,16 @@
-
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>LTWst2</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- CSS -->
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+  <!-- JavaScript -->
+  <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+<header th:replace="/layout/header :: header"></header>
 <form th:action="@{/api/category/saveadd}" th:object="${category}" method="post">
   <label for="categoryName">Name</label>
   <input type="text" th:field="*{categoryName}" id="categoryName" placeholder="Name">
@@ -10,3 +22,6 @@
 
   <input type="submit" value="Add Category">
 </form>
+<footer th:replace="/layout/footer :: footer"></footer>
+</body>
+</html>
