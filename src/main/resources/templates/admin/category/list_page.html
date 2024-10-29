@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>LTWst2</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- CSS -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- JavaScript -->
+    <script th:src="@{/js/bootstrap.js}"></script>
+</head>
+<body>
+<header th:replace="/layout/header :: header"></header>
+<a th:href="@{/api/category/add}">Add category</a>
+
+<!-- Hiển thông báo -->
+<div th:if="${message != null}">
+    <i th:text="${message}"></i>
+</div>
+<!-- Hết thông báo -->
+
+<form th:action="@{/api/category/search-page}" method="get">
+    <input type="text" name="name" id="name" placeholder="Nhập từ khóa để tìm" />
+    <button type="submit">Search</button>
+</form>
+
+<div th:if="${!categoryPage.hasContent()}">
+    No Category
+</div>
+
+<div th:if="${categoryPage.hasContent()}">
+    <table border="1" width="100%">
+        <tr>
+            <th>STT</th>
+            <th>Images</th>
+            <th>CategoryID</th>
+            <th>CategoryName</th>
+        </tr>
+
+        <tr th:each="cate, stat : ${categoryPage}">
+            <td th:text="${stat.index + 1}"></td>
+
+            <td>
+                <img height="150" width="200"
+                     th:src="${#strings.substring(cate.icon, 0, 5) == 'https' ? cate.icon : '/image?fname=' + cate.icon}" />
+            </td>
+
+            <td th:text="${cate.categoryId}"></td>
+            <td th:text="${cate.categoryName}"></td>
+
+            <td>
+                <a th:href="@{/api/category/edit/{id}(id=${cate.categoryId})}">Sửa</a> |
+                <a th:href="@{/api/category/delete/{id}(id=${cate.categoryId})}">Xóa</a> |
+            </td>
+        </tr>
+    </table>
+</div>
+
+<form method="get">
+    Page size:
+    <select name="size" id="size" onchange="this.form.submit()">
+        <option th:selected="${categoryPage.size == 3}" th:value="3">3</option>
+        <option th:selected="${categoryPage.size == 5}" th:value="5">5</option>
+        <option th:selected="${categoryPage.size == 10}" th:value="10">10</option>
+        <option th:selected="${categoryPage.size == 15}" th:value="15">15</option>
+        <option th:selected="${categoryPage.size == 20}" th:value="20">20</option>
+    </select>
+</form>
+
+<div th:if="${categoryPage.totalPages > 0}">
+    <ul>
+        <li th:each="pageNumber : ${pageNumbers}"
+            th:classappend="${pageNumber == categoryPage.number + 1} ? 'page-item active' : 'page-item'">
+            <a th:href="@{/api/category/searchpaginated(name=${name},size=${categoryPage.size},page=${pageNumber})}"
+               th:text="${pageNumber}"></a>
+        </li>
+    </ul>
+</div>
+<footer th:replace="/layout/footer :: footer"></footer>
+</body>
+</html>
+

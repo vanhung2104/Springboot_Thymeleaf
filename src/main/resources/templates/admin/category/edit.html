@@ -16,7 +16,7 @@
     <input type="text" th:field="*{categoryName}" id="name" placeholder="Name">
     <span th:if="${#fields.hasErrors('categoryName')}" th:errors="*{categoryName}"></span>
     <label for="email">Img</label>
-    <input type="text" th:field="*{icon}" id="email" placeholder="Email">
+    <input type="text" th:field="*{icon}" id="email" placeholder="Image">
     <span th:if="${#fields.hasErrors('icon')}" th:errors="*{icon}"></span>
     <input type="submit" value="Edit Category">
 </form>
