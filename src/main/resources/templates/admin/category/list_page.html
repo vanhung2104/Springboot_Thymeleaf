@@ -71,7 +71,7 @@
     <ul>
         <li th:each="pageNumber : ${pageNumbers}"
             th:classappend="${pageNumber == categoryPage.number + 1} ? 'page-item active' : 'page-item'">
-            <a th:href="@{/api/category/searchpaginated(name=${name},size=${categoryPage.size},page=${pageNumber})}"
+            <a th:href="@{/api/category/search-page(name=${name},size=${categoryPage.size},page=${pageNumber})}"
                th:text="${pageNumber}"></a>
         </li>
     </ul>
